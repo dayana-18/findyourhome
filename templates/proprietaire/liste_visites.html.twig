@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}visites{% endblock %}
+
+{% block body %}
+    <h1>Liste de demandes de visites</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Appartement(s)</th>
+                <th>Date de la visite</th>
+                <th>Client</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for visiterdem in visites %}
+            <tr>
+                <td>{{ visiterdem.numappart.rue }} {{ visiterdem.numappart.typeAppart }} {{ visiterdem.numappart.prixLoc }}
+                {{ visiterdem.numappart.codePostal }} {{ visiterdem.numappart.ville }}</td>
+                <td>{{ visiterdem.datevisite ? visiterdem.datevisite|date('Y-m-d') : '' }}</td>
+                {% if visiterdem.id %}
+                <td>{{ visiterdem.id.id.prenom }} {{ visiterdem.id.id.nom }} {{ visiterdem.id.id.tel }} 
+                    {{ visiterdem.id.id.adresse }} {{ visiterdem.id.id.codePostal }} {{ visiterdem.id.id.ville }}</td>
+            {% else %}
+            <td></td>
+            {% endif %}
+                <td>
+                    <button class="btn"><a href="{{ path('visiterdem_edit', {'numvisite': visiterdem.numvisite}) }}">Modifier la date de visite</a></button>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

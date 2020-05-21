@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}demandes{% endblock %}
+
+{% block body %}
+    <h1>Vos demandes</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                
+                <th>Type d'appartement demandé</th>
+                <th>Date limite</th>
+                <th>Ville demandée</th>
+                <th>Arrondissement(s) demandé(s)</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for demande in demandes %}
+            <tr>
+                
+                <td>{{ demande.typeDem }}</td>
+                <td>{{ demande.dateLimite ? demande.dateLimite|date('Y-m-d') : '' }}</td>
+                <td>{{ demande.villeDem }}</td>
+                <td>{% for arrondissement in demande.arrondisseDem %}
+                    {{ arrondissement.arrondisseDem }}
+                    {% endfor %}</td>
+                <td>
+                    <button class="btn"><a href="{{ path('client_recherche', {'numDem': demande.numDem}) }}">Voir</a></button>
+                    <button class="btn"><a href="{{ path('demande_edit', {'numDem': demande.numDem}) }}">Modifier</a></button>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <button class="btn"><a href="{{ path('demande_new') }}"><button class="btn">Faire une demande</a></button>
+{% endblock %}

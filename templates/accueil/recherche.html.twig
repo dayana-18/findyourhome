@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}findyourhome{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1><center>Find your home ! </h1><br>
+    <center>
+    <a href="http://findyourhome.com/login">~~ Se connecter</a>  <a href="http://findyourhome.com/register"> ~~ Créer un compte</a>
+    </center><br>
+</div>
+<div>
+    <form action="/recherche" role="search">
+        <div>
+            <center><input name="t" id="rbox" type="text" class="" placeholder="Type d'appartement"></center>
+            <br>
+        </div> 
+        <div>
+            <center><input name="p" id="rbox" type="number" placeholder="Bugdet maximale"></center><br>
+        </div>
+        <div>
+            <center><input name="v" id="rbox" type="text" placeholder="Ville souhaitée"></center><br>
+        </div>    
+        <center><input type="submit" value="Valider"></center><br>
+    </form>
+</div>
+<div>
+    <center><p>Résultats de recherche pour :  {{ type }} {{ prixmax }} {{ ville }}</p></Center>
+        
+    <ul>
+    {% for appartement in resappartements  %}
+        <li>
+            {{ appartement.typeappart }} {{ appartement.prixLoc }} {{ appartement.codePostal }} {{ appartement.ville}} {{ appartement.arrondisseDem.arrondisseDem }} <br>
+            <a href="{{ path('appartement_show', {'numappart': appartement.numappart}) }}">Voir description</a><br>
+        </li>
+        <br>
+        <img src="{{ asset('photos/' ~ appartement.photo) }}"/>
+        <br>
+    {% endfor %}
+    </ul>
+</div>
+{% endblock %}
+

@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}proprietaire{% endblock %}
+
+{% block body %}
+        <h1>Liste de proprietaires</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Mail</th>
+                <th>Adresse</th>
+                <th>CodePostal</th>
+                <th>Ville</th>
+                <th>Tel</th>
+                <th>Username</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for proprietaire in proprietaires %}
+            <tr>
+                <td>{{ proprietaire.id.nom }}</td>
+                <td>{{ proprietaire.id.prenom }}</td>
+                <td>{{ proprietaire.id.mail }}</td>
+                <td>{{ proprietaire.id.adresse }}</td>
+                <td>{{ proprietaire.id.codePostal }}</td>
+                <td>{{ proprietaire.id.ville }}</td>
+                <td>{{ proprietaire.id.tel }}</td>
+                <td>{{ proprietaire.id.username }}</td>
+                </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

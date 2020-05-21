@@ -1,0 +1,24 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+
+accueil:
+    path: /
+    controller: App\Controller\AccueilController::index
+  
+#client_recherche:  
+#    path: /client/{id}/demande/recherche
+#    controller: App\Controller\UtilisateurController::rechercheDemande
+    
+#login:
+#   path: /
+#   controller: App\Controller\SecurityController::login
+
+
+profil:
+    path: /index
+    controller: App\Controller\ProfilController::index
+    
+#creerDemande:
+#    path:/{id}/demande/new
+#    controller: App\Controller\D::creerDemande

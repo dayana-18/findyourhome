@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}modifier visite{% endblock %}
+
+{% block body %}
+    <h1>Modifier la visite</h1>
+
+    {{ include('visiterdem/_form.html.twig')}}
+    
+
+    <button class="btn"><a href="{{ path('liste_demandes', {'numappart': visiterdem.numappart.numappart}) }}">Retourner</a></button>
+
+    {{ include('visiterdem/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}findyourhome{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+    <h1>Demande</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Type de demande</th>
+                <td>{{ demande.typeDem }}</td>
+            </tr>
+            <tr>
+                <th>Ville demandée</th>
+                <td>{{ demande.villeDem }}</td>
+            </tr>
+            <tr>
+                <th>Date limite</th>
+                <td>{{ demande.dateLimite ? demande.dateLimite|date('d/m/Y') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Arrondissement(s) demandé(s)</th>
+                <td>{% for arrondissement in demande.arrondisseDem %}
+                    {{ arrondissement.arrondisseDem }}
+                    {% endfor %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button class="btn"><a href="{{ path('demande_edit', {'numDem': demande.numDem}) }}">Modifier</a></button>
+
+    {{ include('demande/_delete_form.html.twig') }}
+    
+    <p>~ Résultats de votre demande ~ </p>
+    
+    <ul>
+    {% for appartements in resappartements  %}
+        {% for appartement in appartements  %}
+            <br>
+        <li>
+            {{ appartement.typeappart }} {{ appartement.prixLoc }} {{ appartement.codePostal }} {{ appartement.ville}} {{ appartement.arrondisseDem.arrondisseDem }} <br>
+            <a href="{{ path('appartement_show', {'numappart': appartement.numappart}) }}">Voir description</a><br>
+        </li>
+        <br>
+        <img src="{{ asset('photos/' ~ appartement.photo) }}"/>
+        <br>
+        {% endfor %}
+    {% endfor %}
+    </ul>
+{% endblock %}
+
+

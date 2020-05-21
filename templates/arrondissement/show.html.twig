@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Arrondissement{% endblock %}
+
+{% block body %}
+    <h1>Arrondissement</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>ArrondisseDem</th>
+                <td>{{ arrondissement.arrondisseDem }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('arrondissement_index') }}">back to list</a>
+
+    <a href="{{ path('arrondissement_edit', {'arrondisseDem': arrondissement.arrondisseDem}) }}">edit</a>
+
+    {{ include('arrondissement/_delete_form.html.twig') }}
+{% endblock %}

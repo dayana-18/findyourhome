@@ -1,0 +1,158 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Appartement{% endblock %}
+
+{% block body %}
+    <h1>Appartement</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Numappart</th>
+                <td>{{ appartement.numappart }}</td>
+            </tr>
+            <tr>
+                <th>Rue</th>
+                <td>{{ appartement.rue }}</td>
+            </tr>
+            <tr>
+                <th>Code Postal</th>
+                <td>{{ appartement.codePostal }}</td>
+            </tr>
+            <tr>
+                <th>Ville</th>
+                <td>{{ appartement.ville }}</td>
+            </tr>
+            <tr>
+                <th>Etage</th>
+                <td>{{ appartement.etage }}</td>
+            </tr>
+            <tr>
+                <th>Typeappart</th>
+                <td>{{ appartement.typeappart }}</td>
+            </tr>
+            <tr>
+                <th>Libelle</th>
+                <td>{{ appartement.libelle }}</td>
+            </tr>
+            <tr>
+                <th>PrixLoc</th>
+                <td>{{ appartement.prixLoc }}</td>
+            </tr>
+            <tr>
+                <th>PrixCharges</th>
+                <td>{{ appartement.prixCharges }}</td>
+            </tr>
+            <tr>
+                <th>Ascenseur</th>
+                <td>{{ appartement.ascenseur ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Preavis</th>
+                <td>{{ appartement.preavis ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>DateLibre</th>
+                <td>{{ appartement.dateLibre ? appartement.dateLibre|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Cotisation</th>
+                <td>{{ appartement.cotisation }}</td>
+            </tr>
+            <tr>
+                <th>Arrondissement</th>
+                <td>{{ appartement.arrondisseDem.arrondisseDem }}</td>
+            </tr>
+        </tbody>
+    </table>
+            
+            <br>
+    
+    <img src="{{ asset('photos/' ~ appartement.photo) }}"/>
+    <br>
+            
+    {% if is_granted('ROLE_PROPRIETAIRE') %}
+
+        <a href="{{ path('appartement_edit', {'numappart': appartement.numappart}) }}">Modifier appartement</a>
+
+        {{ include('appartement/_delete_form.html.twig') }}
+    {% endif %}    
+
+        <h2>Proprietaire</h2>
+
+        <table class="table">
+            <tbody>
+                <tr>
+                {% for propri in proprietaire %}
+                    <th>Nom</th>
+                    <td>{{ propri.nom }}</td>
+                </tr>
+                <tr>
+                    <th>Prenom</th>
+                    <td>{{ propri.prenom }}</td>
+                </tr>
+                <tr>
+                    <th>Adresse</th>
+                    <td>{{ propri.adresse }}</td>
+                </tr>
+                <tr>
+                    <th>CodePostal</th>
+                    <td>{{ propri.codePostal }}</td>
+                </tr>
+                <tr>
+                    <th>Ville</th>
+                    <td>{{ propri.ville }}</td>
+                </tr>
+                <tr>
+                    <th>Tel</th>
+                    <td>{{ propri.tel }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+            
+                        
+    {% if is_granted('ROLE_CLIENT') or is_granted('ROLE_LOCATAIRE') %}
+
+    <a href="{{ path('visiter_new', {'numappart': appartement.numappart}) }}">Faire une demande de visite</a>
+    
+    {% endif %}
+
+        {% if is_granted('ROLE_PROPRIETAIRE') %}
+        
+        <h3>Locataire</h3>
+        
+        {% if locataire %}
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Nom</th>
+                    <td>{{ locataire.id.nom }}</td>
+                </tr>
+                <tr>
+                    <th>Prenom</th>
+                    <td>{{ locataire.id.prenom }}</td>
+                </tr>
+                <tr>
+                    <th>RIB</th>
+                    <td>{{ locataire.rIB }}</td>
+                </tr>
+                <tr>
+                    <th>TelBanque</th>
+                    <td>{{ locataire.telBanque }}</td>
+                </tr>
+                <tr>
+                    <th>Tel</th>
+                    <td>{{ locataire.id.tel }}</td>
+                </tr>
+            </tbody>
+        </table>
+                <a href="{{ path('locataire_edit', {'id': locataire.id.id }) }}">Modifier locataire</a>
+            {% else %}
+                <a href="{{ path('locataire_new') }}">Nouveau locataire</a>
+                
+        {% endif %}
+    {% endif %}
+    <br>
+    <a href="{{ path('app_login') }}">Retournez à l'accueil</a>
+{% endblock %}

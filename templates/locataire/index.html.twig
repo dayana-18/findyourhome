@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Locataire index{% endblock %}
+
+{% block body %}
+        <h1>Liste de locataires</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Mail</th>
+                <th>Adresse</th>
+                <th>CodePostal</th>
+                <th>Ville</th>
+                <th>Tel</th>
+                <th>Username</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for locataire in locataires %}
+            <tr>
+                <td>{{ locataire.id.nom }}</td>
+                <td>{{ locataire.id.prenom }}</td>
+                <td>{{ locataire.id.mail }}</td>
+                <td>{{ locataire.id.adresse }}</td>
+                <td>{{ locataire.id.codePostal }}</td>
+                <td>{{ locataire.id.ville }}</td>
+                <td>{{ locataire.id.tel }}</td>
+                <td>{{ locataire.id.username }}</td>
+                </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+        
+{% endblock %}

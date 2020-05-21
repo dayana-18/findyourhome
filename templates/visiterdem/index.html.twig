@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Visite{% endblock %}
+
+{% block body %}
+    <h1>Visites</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Numvisite</th>
+                <th>Datevisite</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for visiterdem in visiterdems %}
+            <tr>
+                <td>{{ visiterdem.numvisite }}</td>
+                <td>{{ visiterdem.datevisite ? visiterdem.datevisite|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('visiterdem_show', {'numvisite': visiterdem.numvisite}) }}">show</a>
+                    <a href="{{ path('visiterdem_edit', {'numvisite': visiterdem.numvisite}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('visiterdem_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Appartement index{% endblock %}
+
+{% block body %}
+    <h1>Appartement index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Numappart</th>
+                <th>Rue</th>
+                <th>Etage</th>
+                <th>Typeappart</th>
+                <th>PrixLoc</th>
+                <th>PrixCharges</th>
+                <th>Ascenseur</th>
+                <th>Preavis</th>
+                <th>DateLibre</th>
+                <th>Cotisation</th>
+                <th>CodePostal</th>
+                <th>Ville</th>
+                <th>Libelle</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for appartement in appartements %}
+            <tr>
+                <td>{{ appartement.numappart }}</td>
+                <td>{{ appartement.rue }}</td>
+                <td>{{ appartement.etage }}</td>
+                <td>{{ appartement.typeappart }}</td>
+                <td>{{ appartement.prixLoc }}</td>
+                <td>{{ appartement.prixCharges }}</td>
+                <td>{{ appartement.ascenseur ? 'Yes' : 'No' }}</td>
+                <td>{{ appartement.preavis ? 'Yes' : 'No' }}</td>
+                <td>{{ appartement.dateLibre ? appartement.dateLibre|date('Y-m-d') : '' }}</td>
+                <td>{{ appartement.cotisation }}</td>
+                <td>{{ appartement.codePostal }}</td>
+                <td>{{ appartement.ville }}</td>
+                <td>{{ appartement.libelle }}</td>
+                <td>
+                    <a href="{{ path('appartement_show', {'numappart': appartement.numappart}) }}">show</a>
+                    <a href="{{ path('appartement_edit', {'numappart': appartement.numappart}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="14">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('appartement_new') }}">Create new</a>
+{% endblock %}

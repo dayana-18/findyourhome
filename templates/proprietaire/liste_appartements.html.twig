@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste Appartements{% endblock %}
+
+{% block body %}
+    <h1>Ma liste d'appartements</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Numéro appartement</th>
+                <th>Rue</th>
+                <th>Type appartement</th>
+                <th>Prix location</th>
+                <th>Prix charges</th>
+                <th>Date libre</th>
+                <th>Cotisation</th>
+                <th>Code postal</th>
+                <th>Ville</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for appartement in appartements %}
+            <tr>
+                <td>{{ appartement.numappart }}</td>
+                <td>{{ appartement.rue }}</td>
+                <td>{{ appartement.typeappart }}</td>
+                <td>{{ appartement.prixLoc }}</td>
+                <td>{{ appartement.prixCharges }}</td>
+                <td>{{ appartement.dateLibre ? appartement.dateLibre|date('Y-m-d') : '' }}</td>
+                <td>{{ appartement.cotisation }}</td>
+                <td>{{ appartement.codePostal }}</td>
+                <td>{{ appartement.ville }}</td>
+                <td>
+                    <button class="btn"><a href="{{ path('appartement_show', {'numappart': appartement.numappart}) }}">Voir</a></button>
+                    <button class="btn"><a href="{{ path('appartement_edit', {'numappart': appartement.numappart}) }}">Modifier</a></button>
+                    <button class="btn"><a href="{{ path('liste_demandes', {'numappart': appartement.numappart}) }}">Demandes</a></button>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <button class="btn"><a href="{{ path('appartement_new') }}">Ajouter un appartement</a></button>
+{% endblock %}

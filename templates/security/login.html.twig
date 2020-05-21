@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+    
+    <h1><center>{{ message }} </h1>
+<form method="post">
+    
+    <h1 class="h3 mb-3 font-weight-normal">Se connecter</h1>
+    <label for="inputLogin">Login</label>
+    <input type="text" value="{{ last_username }}" name="login" id="inputLogin" class="form-control" required autofocus>
+    <label for="inputPassword">Mot de passe</label>
+    <input type="password" name="password" id="inputPassword" class="form-control" required>
+
+    <input type="hidden" name="_csrf_token"
+           value="{{ csrf_token('authenticate') }}"
+    >
+    
+    <div class="checkbox mb-3">
+        <input type="checkbox" id="remember_me" name="_remember_me" checked/>
+        <label for="remember_me">Maintenir la connexion</label>
+    </div>
+    
+
+    <button class="btn btn-lg btn-primary" type="submit">
+        Connexion
+    </button>
+    <br>
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+    
+    {% if app.user %}
+        <br>
+        <div class="mb-3">
+            Vous etes connectés en tant que {{ app.user.username }}, <a href="{{ path('app_logout') }}">Se déconnecter</a>
+            <br>
+            Vous etes
+            {% if is_granted('ROLE_PROPRIETAIRE') %}
+                proprietaire
+            {% elseif is_granted('ROLE_CLIENT') %}
+                client
+            {% elseif is_granted('ROLE_LOCATAIRE') %}
+                locataire
+            {% else %}
+                un utilisateur
+            {% endif %}
+        </div>
+    {% endif %}
+    
+</form>
+    <br>
+<div>
+    <ul>
+    {% for appartement in appartements  %}
+        <br>
+        <li>
+            {{ appartement.typeappart }} {{ appartement.prixLoc }} {{ appartement.codePostal }} {{ appartement.ville}} {{ appartement.arrondisseDem.arrondisseDem }} <br>
+            <a href="{{ path('appartement_show', {'numappart': appartement.numappart}) }}">Voir description</a><br>
+        </li>
+        <br>
+        <img src="{{ asset('photos/' ~ appartement.photo) }}"/>
+        <br>
+    {% endfor %}
+    </ul>
+</div>
+{% endblock %}

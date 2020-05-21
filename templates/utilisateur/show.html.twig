@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Compte{% endblock %}
+
+{% block body %}
+    <h1>Complétez vos informations</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ app.user.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ app.user.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ app.user.prenom }}</td>
+            </tr>
+            <tr>
+                <th>Mail</th>
+                <td>{{ app.user.mail }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ app.user.adresse }}</td>
+            </tr>
+            <tr>
+                <th>CodePostal</th>
+                <td>{{ app.user.codePostal }}</td>
+            </tr>
+            <tr>
+                <th>Ville</th>
+                <td>{{ app.user.ville }}</td>
+            </tr>
+            <tr>
+                <th>Tel</th>
+                <td>{{ app.user.tel }}</td>
+            </tr>
+            <tr>
+                <th>Login</th>
+                <td>{{ app.user.username }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button class="btn"><a href="{{ path('demande_new') }}">Formulaire de demande</a> </button>
+            
+    <button class="btn"><a href="{{ path('app_login') }}">Revenir</a></button>
+
+    <button class="btn"><a href="{{ path('utilisateur_edit', {'id': app.user.id}) }}">Editer</a></button>
+
+    {{ include('utilisateur/_delete_form.html.twig') }}
+{% endblock %}

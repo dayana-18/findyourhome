@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Demande index{% endblock %}
+
+{% block body %}
+    <h1>Demande index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>NumDem</th>
+                <th>TypeDem</th>
+                <th>DateLimite</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for demande in demandes %}
+            <tr>
+                <td>{{ demande.numDem }}</td>
+                <td>{{ demande.typeDem }}</td>
+                <td>{{ demande.dateLimite ? demande.dateLimite|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('demande_show', {'numDem': demande.numDem}) }}">show</a>
+                    <a href="{{ path('demande_edit', {'numDem': demande.numDem}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('demande_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Visiterdem{% endblock %}
+
+{% block body %}
+    <h1>Visiterdem</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Numvisite</th>
+                <td>{{ visiterdem.numvisite }}</td>
+            </tr>
+            <tr>
+                <th>Datevisite</th>
+                <td>{{ visiterdem.datevisite ? visiterdem.datevisite|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Id Client</th>
+                <td>{{ visiterdem.id.id.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <button class="btn"><a href="{{ path('visiterdem_edit', {'numvisite': visiterdem.numvisite}) }}">modifier</a></button>
+    
+    {{ include('visiterdem/_delete_form.html.twig') }}
+{% endblock %}

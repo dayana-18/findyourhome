@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Locataire{% endblock %}
+
+{% block body %}
+    <h1>Locataire</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>RIB</th>
+                <td>{{ locataire.rIB }}</td>
+            </tr>
+            <tr>
+                <th>TelBanque</th>
+                <td>{{ locataire.telBanque }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('locataire_index') }}">back to list</a>
+
+    <a href="{{ path('locataire_edit', {'id': locataire.id}) }}">edit</a>
+
+    {{ include('locataire/_delete_form.html.twig') }}
+{% endblock %}
